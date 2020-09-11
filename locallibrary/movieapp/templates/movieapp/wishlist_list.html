@@ -1,0 +1,28 @@
+{% extends 'movieapp/movieapp_base.html' %}
+{% block movie_content %}
+<!-- {% if user.is_authenticated %} -->
+  {% if user.is_authenticated %}
+    <div class="centerstage">
+      {% if wishlist_list %}
+        {% for movie in wishlist_list %}
+
+        <div class="post">
+          <h1> <a href="{% url 'single' pk=movie.pk %}">{{movie.wished_movie}}</a> </h1>
+          <h1> {{user.wished_movie}}</h1>
+
+        </div>
+        {% endfor %}
+      {% else %}
+        <h3>You don't have any wishlisted movie</h3>
+      {% endif %}
+  {% else %}
+    <h1>Kidnly login to check you wishlist</h1>
+  {% endif %}
+
+
+<!-- {% else %} -->
+
+<h1><a href="{% url 'accounts:login' %}">Login to check your wishlist</a></h1>
+<!-- {% endif %} -->
+
+{% endblock %}

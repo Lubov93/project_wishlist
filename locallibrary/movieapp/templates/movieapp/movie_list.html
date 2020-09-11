@@ -1,0 +1,28 @@
+{% extends 'movieapp/movieapp_base.html' %}
+{% block movie_content %}
+
+<div class="centerstage">
+  {% if movie_list %}
+    {% for movie in movie_list %}
+
+    <div class="container">
+      <h1> <a href="{% url 'single' pk=movie.pk %}">{{movie.movie_name}}</a> </h1>
+      <div class="date">
+        <p>Realesed On: {{movie.release_year}}</p>
+        <p>Imdb Rating: {{movie.rating}}</p>
+        <p>Crew: {{movie.movie_crew}}</p>
+        {% if user.is_authenticated %}
+        <h3> <a href="{% url 'wishlist' pk=movie.pk %}">Add to wishlist</a> </h3>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <h1>Opps!</h1>
+    <h2>It Seems no movie available</h2>
+  {% endif %}
+
+
+</div>
+
+{% endblock %}

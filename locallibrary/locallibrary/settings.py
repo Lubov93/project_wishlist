@@ -1,13 +1,14 @@
 import os
-
+#import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 
-#SECRET_KEY = '+9y&&63-a-sr11c^z141mrmh(j$514&uo@89rl^eq%jkd3f9pk'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','+9y&&63-a-sr11c^z141mrmh(j$514&uo@89rl^eq%jkd3f9pk')
+SECRET_KEY = '+9y&&63-a-sr11c^z141mrmh(j$514&uo@89rl^eq%jkd3f9pk'
+#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','+9y&&63-a-sr11c^z141mrmh(j$514&uo@89rl^eq%jkd3f9pk')
 
-#DEBUG = True
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+DEBUG = True
+#DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 
 ALLOWED_HOSTS = []
@@ -22,11 +23,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'movieapp',
+    'accounts',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,7 +45,7 @@ ROOT_URLCONF = 'locallibrary.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,15 +104,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = 'test'
+LOGOUT_REDIRECT_URL = 'thanks'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
@@ -118,4 +121,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
