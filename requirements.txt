@@ -1,5 +1,5 @@
 dj-database-url==0.5.0
-Django==1.11.29
+Django
 django-allauth==0.42.0
 django-braces==1.14.0
 django-cors-headers==3.4.0
