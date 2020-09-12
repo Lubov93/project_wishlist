@@ -8,7 +8,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 
 
 #SECRET_KEY = 'r^hirqh6d(7*!g57ug&oo1mi-n3nzfax73(l_gt#x3g8odp4$k'
-ECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'r^hirqh6d(7*!g57ug&oo1mi-n3nzfax73(l_gt#x3g8odp4$k')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'r^hirqh6d(7*!g57ug&oo1mi-n3nzfax73(l_gt#x3g8odp4$k')
 
 #DEBUG = True
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
