@@ -26,3 +26,4 @@ whitenoise==5.2.
 requests
 lxml
 django-bootstrap4
+whitenoise==3.2.2

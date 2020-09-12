@@ -1,15 +1,17 @@
 
 import os
+import dj_database_url
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 
 
-SECRET_KEY = 'r^hirqh6d(7*!g57ug&oo1mi-n3nzfax73(l_gt#x3g8odp4$k'
+#SECRET_KEY = 'r^hirqh6d(7*!g57ug&oo1mi-n3nzfax73(l_gt#x3g8odp4$k'
+ECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'r^hirqh6d(7*!g57ug&oo1mi-n3nzfax73(l_gt#x3g8odp4$k')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = []
 
@@ -32,12 +34,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'movie.urls'
@@ -108,8 +112,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+#STATIC_URL = '/static/'
+#STATICFILES_DIR = os.path.join(BASE_DIR,'static')
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
-STATICFILES_DIR = os.path.join(BASE_DIR,'static')
 
 LOGIN_REDIRECT_URL = 'test'
 LOGOUT_REDIRECT_URL = 'thanks'
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
